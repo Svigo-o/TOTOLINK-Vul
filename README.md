@@ -1,5 +1,5 @@
 # TOTOLINK-Vul
-Totolink 路由器漏洞复现与分析记录。
+Totolink 路由器漏洞挖掘与验证分析记录。
 
 ## 漏洞列表
 
