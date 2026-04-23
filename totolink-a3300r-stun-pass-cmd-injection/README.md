@@ -12,6 +12,8 @@ Vulnerability: Command Injection
 
 Type:Command Injection Attack
 
+CVE: CVE-2026-31170
+
 
 
 
