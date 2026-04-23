@@ -12,7 +12,7 @@ Vulnerability: Command Injection
 
 Type:Command Injection Attack
 
-CVE: TBD
+CVE: CVE-2026-31169
 
 
 

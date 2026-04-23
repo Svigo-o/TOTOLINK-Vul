@@ -7,12 +7,12 @@ Totolink 路由器漏洞挖掘与验证分析记录。
 | --- | --- | --- | --- | --- | --- |
 | [totolink-a3300r-password-cmd-injection](totolink-a3300r-password-cmd-injection) | A3300R | DDNS / `setDdnsCfg` | `password` | Command Injection | CVE-2026-31159 |
 | [totolink-a3300r-provider-cmd-injection](totolink-a3300r-provider-cmd-injection) | A3300R | DDNS / `setDdnsCfg` | `provider` | Command Injection | CVE-2026-31160 |
-| [totolink-a3300r-mode-cmd-injection](totolink-a3300r-mode-cmd-injection) | A3300R | Schedule / `setScheduleCfg` | `mode` | Command Injection | TBD |
-| [totolink-a3300r-hour-cmd-injection](totolink-a3300r-hour-cmd-injection) | A3300R | Schedule / `setScheduleCfg` | `hour` | Command Injection | TBD |
-| [totolink-a3300r-week-cmd-injection](totolink-a3300r-week-cmd-injection) | A3300R | Schedule / `setScheduleCfg` | `week` | Command Injection | TBD |
-| [totolink-a3300r-rechour-cmd-injection](totolink-a3300r-rechour-cmd-injection) | A3300R | Schedule / `setScheduleCfg` | `recHour` | Command Injection | TBD |
-| [totolink-a3300r-dhcp-mtu-cmd-injection](totolink-a3300r-dhcp-mtu-cmd-injection) | A3300R | WAN / `setWanCfg` | `dhcpMtu` | Command Injection | TBD |
-| [totolink-a3300r-ttl-way-cmd-injection](totolink-a3300r-ttl-way-cmd-injection) | A3300R | WAN / `setWanCfg` | `ttlWay` | Command Injection | TBD |
+| [totolink-a3300r-mode-cmd-injection](totolink-a3300r-mode-cmd-injection) | A3300R | Schedule / `setScheduleCfg` | `mode` | Command Injection | CVE-2026-31167 |
+| [totolink-a3300r-hour-cmd-injection](totolink-a3300r-hour-cmd-injection) | A3300R | Schedule / `setScheduleCfg` | `hour` | Command Injection | CVE-2026-31166 |
+| [totolink-a3300r-week-cmd-injection](totolink-a3300r-week-cmd-injection) | A3300R | Schedule / `setScheduleCfg` | `week` | Command Injection | CVE-2026-31169 |
+| [totolink-a3300r-rechour-cmd-injection](totolink-a3300r-rechour-cmd-injection) | A3300R | Schedule / `setScheduleCfg` | `recHour` | Command Injection | CVE-2026-31168 |
+| [totolink-a3300r-dhcp-mtu-cmd-injection](totolink-a3300r-dhcp-mtu-cmd-injection) | A3300R | WAN / `setWanCfg` | `dhcpMtu` | Command Injection | CVE-2026-31163 |
+| [totolink-a3300r-ttl-way-cmd-injection](totolink-a3300r-ttl-way-cmd-injection) | A3300R | WAN / `setWanCfg` | `ttlWay` | Command Injection | CVE-2026-31162 |
 | [totolink-a3300r-lcp-echo-enable-cmd-injection](totolink-a3300r-lcp-echo-enable-cmd-injection) | A3300R | WAN / `setWanCfg` | `lcpEchoEnable` | Command Injection | TBD |
 | [totolink-a3300r-pppoe-service-name-cmd-injection](totolink-a3300r-pppoe-service-name-cmd-injection) | A3300R | IPv6 / `setIpv6Cfg` | `pppoeServiceName` | Command Injection | CVE-2026-31165 |
 | [totolink-a3300r-pppoe-mtu-cmd-injection](totolink-a3300r-pppoe-mtu-cmd-injection) | A3300R | IPv6 / `setIpv6Cfg` | `pppoeMtu` | Command Injection | CVE-2026-31164 |
